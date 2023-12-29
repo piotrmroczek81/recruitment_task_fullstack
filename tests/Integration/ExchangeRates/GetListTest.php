@@ -6,7 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class GetListTest extends WebTestCase
 {
-    public function testConnectivity(): void
+    public function testGetList(): void
     {
         $client = static::createClient();
 
@@ -15,9 +15,10 @@ class GetListTest extends WebTestCase
         $response = $client->getResponse();
         $this->assertJson($response->getContent());
         $responseData = json_decode($response->getContent(), TRUE);
-        $this->assertEquals('hello', $responseData);
-        // $this->assertArrayHasKey('testParam', $responseData);
+        
+        $this->assertArrayHasKey('currency', $responseData[0]);
+        $this->assertArrayHasKey('buy', $responseData[0]);
+        $this->assertArrayHasKey('sell', $responseData[0]);
+        $this->assertArrayHasKey('NBP', $responseData[0]);
     }
-
-
 }
