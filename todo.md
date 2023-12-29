@@ -1,6 +1,5 @@
 todo:
 
-
 ~~ obsluda daty w urlu ~~
 ~~ fallback daty gy w urlu brak ~~
 testy frontu
@@ -74,4 +73,5 @@ api backend
 
 
 
-test backend
+test backend GetListTest
+naprawic Integration\SetupCheck\SetupCheckTest::testConnectivity
