@@ -20,5 +20,11 @@ class GetListTest extends WebTestCase
         $this->assertArrayHasKey('buy', $responseData[0]);
         $this->assertArrayHasKey('sell', $responseData[0]);
         $this->assertArrayHasKey('NBP', $responseData[0]);
+
+        $this->assertArrayHasKey('currency', $responseData[1]);
+        $this->assertArrayHasKey('buy', $responseData[1]);
+        $this->assertArrayHasKey('sell', $responseData[1]);
+        $this->assertArrayHasKey('NBP', $responseData[1]);
+    
     }
 }
