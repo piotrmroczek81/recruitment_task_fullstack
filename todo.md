@@ -1,6 +1,15 @@
 todo:
 
+~~ obsluda daty w urlu ~~
+~~ fallback daty gy w urlu brak ~~
+testy frontu
+walidacja poprawnosci daty w urlu i przekierowanie do 404
+sprawdzanie daty granicznej
+strona 404
+
 pobieranie kursow z api backend
+podswietlanie current routy w menu
+
 api backend
 ```
         let exchangeRates =
@@ -66,4 +75,3 @@ api backend
 
 test backend GetListTest
 naprawic Integration\SetupCheck\SetupCheckTest::testConnectivity
-
