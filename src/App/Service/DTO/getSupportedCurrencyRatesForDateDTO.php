@@ -47,37 +47,37 @@ class SupportedCurrencyRatesForDateDTO implements \JsonSerializable
             ],            
             [
                 'currency' => [
-                    'name' => 'Euro',
-                    'code' => 'EUR'
+                    'name' => 'Dolar amerykański',
+                    'code' => 'USD'
                 ],
                 'buy' => [
                     'dataA' => [
-                            'date' =>1, 
-                            'price' => 2
+                            'date' =>9, 
+                            'price' => 10
                         ],
                     'dataB' => [
-                            'date' =>1, 
-                            'price' => 2
+                            'date' =>11, 
+                            'price' => 12
                     ],
                 ],
                 'sell' => [
                     'dataA' => [
-                            'date' =>1, 
-                            'price' => 2
+                            'date' =>13, 
+                            'price' => 14
                         ],
                     'dataB' => [
-                            'date' =>3, 
-                            'price' => 4
+                            'date' =>15, 
+                            'price' => 16
                     ],
                 ],
                 'NBP' => [
                     'dataA' => [
-                            'date' =>5, 
-                            'price' => 6
+                            'date' =>17, 
+                            'price' => 18
                         ],
                     'dataB' => [
-                            'date' =>7, 
-                            'price' => 8
+                            'date' =>19, 
+                            'price' => 20
                     ],
                 ]
             ] 

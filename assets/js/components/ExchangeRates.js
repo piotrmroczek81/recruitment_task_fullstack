@@ -2,6 +2,9 @@ import React, {Component} from 'react';
 import axios from 'axios';
 import { generatePath } from "react-router";
 
+
+// /exchange-rates/2023-01-01
+
 class ExchangeRate extends Component {
 
     render() {
@@ -60,12 +63,12 @@ class ExchangeRate extends Component {
                 </thead>
                 <tbody>
                 <tr>
-                        <td>{rate.nbp.dataA.date}</td>
-                        <td>{rate.nbp.dataA.price}</td>
+                        <td>{rate.NBP.dataA.date}</td>
+                        <td>{rate.NBP.dataA.price}</td>
                     </tr>
                     <tr>
-                        <td>{rate.nbp.dataB.date}</td>
-                        <td>{rate.nbp.dataB.price}</td>
+                        <td>{rate.NBP.dataB.date}</td>
+                        <td>{rate.NBP.dataB.price}</td>
                     </tr>
                 </tbody>
             </table>
@@ -79,7 +82,7 @@ class ExchangeRate extends Component {
 class ExchangeRates extends Component {
     constructor(props) {
         super(props);
-        this.state = { setupCheck: {}, loading: true, date: "dupa", exchangeRates : []};
+        this.state = { setupCheck: {}, loading: true, date: null, exchangeRates : []};
         console.log({'from': 'ExchangeRates.constructor', state: this.state})
     }
 
@@ -89,81 +92,28 @@ class ExchangeRates extends Component {
 
     handleLinkChange = () => {
         console.log({'from': 'ExchangeRates.handleLinkChange', state: this.state})
-        this.getDataFromApi() 
+        this.getDataFromApi(this.state.date) 
     };
 
-    getDataFromApi() {
 
-        let exchangeRates =
-            [
-                {
-                    currency: {
-                        name: 'Euro',
-                        code: 'EUR'
-                    },
-                    buy: {
-                        dataA: {date:1, price: 2},
-                        dataB: {date:3, price: 4 }
-                    },
-                    sell: {
-                        dataA: {date:5, price: 6 },
-                        dataB: {date:7, price: 8 }
-                    },
-                    nbp: {
-                        dataA: {date:9, price: 10 },
-                        dataB: {date:11, price: 12 }
-                    }
-                },
-                {
-                    currency: {
-                        name: 'Dolar amerykański',
-                        code: 'USD'
-                    },
-                    buy: {
-                        dataA: {date:1, price: 2},
-                        dataB: {date:3, price: 4 }
-                    },
-                    sell: {
-                        dataA: {date:5, price: 6 },
-                        dataB: {date:7, price: 8 }
-                    },
-                    nbp: {
-                        dataA: {date:9, price: 10 },
-                        dataB: {date:11, price: 12 }
-                    }
-                },
-                {
-                    currency: {
-                        name: 'Boliwar dla Pana Waldemara z Cargo',
-                        code: 'WAL'
-                    },
-                    buy: {
-                        dataA: {date:1, price: 2},
-                        dataB: {date:3, price: 4 }
-                    },
-                    sell: {
-                        dataA: {date:5, price: 6 },
-                        dataB: {date:7, price: 8 }
-                    },
-                    nbp: {
-                        dataA: {date:9, price: 10 },
-                        dataB: {date:11, price: 12 }
-                    }
-                }
-            ];
-         
-        for (let i = exchangeRates.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-          
-            const temp = exchangeRates[i];
-            exchangeRates[i] = exchangeRates[j];
-            exchangeRates[j] = temp;
-          }   
+    getDataFromApi(when) {
+    
+        const baseUrl = 'http://telemedi-zadanie.localhost';
+        axios.get(baseUrl + `/api/exchange-rates/` + when).then(response => {
 
-        this.setState({ exchangeRates : exchangeRates}, () => {
-            console.log({'from': 'ExchangeRates.getDataFromApi', state: this.state})
+            console.log({data:response.data});
+
+            this.setState({ exchangeRates : response.data}, () => {
+                console.log({'from': 'ExchangeRates.getDataFromApi', state: this.state})
+            });
+
+        }).catch(function (error) {
+            console.error(error);
+            alert('wystapil blad');
         });
     }
+
+
 
     componentDidMount() {
 
@@ -181,7 +131,7 @@ class ExchangeRates extends Component {
         }  
 
         this.setState({ date: date }, () => {
-            this.getDataFromApi()                
+            this.getDataFromApi(date)                
             console.log({'when' : this.state.date});
         });
         
@@ -222,6 +172,7 @@ class ExchangeRates extends Component {
                                         <input type="date" className="form-control" id="datePicker" placeholder="Select a date" 
                                         value =  {this.state.date}
                                         onChange={this.handleChange}
+
                                         />
                                     </div>
                             </div>
