@@ -4,6 +4,13 @@
 #  methods:  GET
 #
 
+
+exchange-rates:
+    path: /api/exchange-rates/{when?}
+    controller: App\Controller\ExchangeRatesController::getList
+    requirements:
+        when: "^([0-9]{4}-[0-9]{2}-[0-9]{2}$)*"
+
 setupcheck:
     path: /api/setup-check
     controller: App\Controller\DefaultController::setupCheck
